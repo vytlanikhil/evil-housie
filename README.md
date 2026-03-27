@@ -7,7 +7,7 @@ A production-ready, real-time multi-device Housie (Tambola) system. Designed to 
 - **Stealth Override System:** Dedicated Controller UI (Mobile B) allows an admin to inject specific numbers up to 90. Injections are randomized with a 2-5 second delay to appear perfectly natural and stochastic.
 - **Fail-safe State Persistence:** The entire game state auto-saves to `state.json`. If the server crashes or loses power, rebooting seamlessly picks up where the game left off exactly.
 - **Race Condition Prevention:** Fully synchronized number generation utilizing strict thread locking (`threading.Lock()`).
-- **Text-to-Speech (TTS):** Integrated offline voice synthesis (`pyttsx3`) running in a non-blocking daemon thread to read out drawn numbers automatically.
+- **Text-to-Speech (TTS):** Integrated HTML5 Web Speech API directly in the Mobile A front-end to announce drawn numbers synchronously.
 - **Rate-Limited Controls:** Strict rate limiting is implemented to prevent system flooding from the Override controller.
 
 ## Setup Instructions 🛠️

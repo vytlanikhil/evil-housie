@@ -68,6 +68,10 @@ function initMobileA() {
     socket.on('next_number_generated', (data) => {
         updateDisplay(data);
         updateGrid(data.called_numbers);
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(new SpeechSynthesisUtterance("Number " + data.current_number));
+        }
     });
 
     socket.on('error', (data) => {
@@ -92,6 +96,10 @@ function initMobileA() {
         if (nextBtn) {
             nextBtn.disabled = false;
             nextBtn.textContent = 'Next Number';
+        }
+        if ('speechSynthesis' in window && window.location.pathname.includes('mobileA')) {
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(new SpeechSynthesisUtterance("Game Restarted"));
         }
     });
 

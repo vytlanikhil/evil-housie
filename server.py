@@ -4,7 +4,6 @@ import random
 import time
 import logging
 import threading
-import pyttsx3
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
@@ -43,38 +42,6 @@ logger.addHandler(file_handler)
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
-
-# TTS Threading Setup
-tts_queue = []
-tts_lock = threading.Condition()
-
-def tts_worker():
-    """ Runs in a separate daemon thread to completely prevent blocking the server """
-    try:
-        engine = pyttsx3.init()
-        engine.setProperty('rate', 150)
-        while True:
-            with tts_lock:
-                while not tts_queue:
-                    tts_lock.wait()
-                text = tts_queue.pop(0)
-
-            try:
-                engine.say(text)
-                engine.runAndWait()
-            except Exception as e:
-                logger.error(f"TTS Synthesis Error: {e}")
-    except Exception as e:
-        logger.error(f"TTS Engine Initialization Error: {e}")
-
-tts_thread = threading.Thread(target=tts_worker, daemon=True)
-tts_thread.start()
-
-def speak(text):
-    """ Enqueue a message to be spoken """
-    with tts_lock:
-        tts_queue.append(text)
-        tts_lock.notify()
 
 def load_state():
     """ Safe loading of previous game state. """
@@ -189,7 +156,6 @@ def handle_request_next_number(data=None):
         else:
             emit('error', {"message": error})
     else:
-        speak(f"Number {number}")
         socketio.emit('next_number_generated', get_sync_data())
 
 def reset_game():
