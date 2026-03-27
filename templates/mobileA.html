@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housie - Caller Display</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body id="mobileA">
+    <div class="container">
+        <h1>Tambola Caller</h1>
+        
+        <div id="current-number-display">--</div>
+        
+        <div style="display: flex; gap: 10px;">
+            <button id="next-btn" class="primary-btn">Next Number</button>
+            <button id="restart-btn" class="danger-btn">Restart Game</button>
+        </div>
+        
+        <div class="stats panel">
+            Remaining Numbers: <span id="remaining-count">90</span>
+        </div>
+
+        <div id="grid">
+            <!-- Dynamically populated by app.js -->
+        </div>
+
+        <div class="history-panel panel">
+            <h3>Recent History</h3>
+            <ul id="history-list"></ul>
+        </div>
+    </div>
+    
+    <script src="/static/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initMobileA();
+        });
+    </script>
+</body>
+</html>

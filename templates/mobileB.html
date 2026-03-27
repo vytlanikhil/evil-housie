@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housie - Controller</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body id="mobileB">
+    <div class="container container-b">
+        <h1>Override Controller</h1>
+        
+        <div class="panel">
+            <div class="input-group">
+                <input type="number" id="override-input" min="1" max="90" placeholder="Number (1-90)">
+                <button id="override-submit" class="danger-btn">Inject</button>
+            </div>
+            <div id="status-message" class="status-box"></div>
+        </div>
+
+        <div class="stats panel">
+            <h3>System Status</h3>
+            <div class="stat-row">
+                <span>Current Number:</span>
+                <strong id="current-number-display" class="large-text">--</strong>
+            </div>
+            <div class="stat-row">
+                <span>Remaining Pool:</span>
+                <strong id="remaining-count">90</strong>
+            </div>
+        </div>
+        
+        <div class="history-panel panel">
+            <h3>Recent History</h3>
+            <ul id="history-list"></ul>
+        </div>
+    </div>
+    
+    <script src="/static/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initMobileB();
+        });
+    </script>
+</body>
+</html>
