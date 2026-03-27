@@ -39,7 +39,8 @@ Find the Internal IP address of the PC running the server (e.g., `192.168.1.50`)
 
 1. **Mobile A (Caller & Display):** Open `http://<YOUR_PC_IP>:5000/mobileA` on a tablet or phone to display the Housie Caller, the 1-90 board, and the drawn number history.
 2. **Mobile B (Stealth Controller):** Open `http://<YOUR_PC_IP>:5000/mobileB` on the admin's hidden device to inject priority numbers securely overriding the RNG.
-
+ **Note:**
+ - To view your IP address, open the Command Prompt, type `ipconfig`, and press Enter. According to your connection type, select the appropriate IPv4 address (e.g., if you are connected to Wi-Fi, select the Wireless LAN adapter Wi-Fi IP address; if you are on Ethernet, select the Ethernet adapter IP address).
 ## Engineering Highlights 🧠
 - **Idempotency & Concurrency:** All operations mapping to `remaining_numbers` and `override_queue` are computationally safe and bound by memory locks.
 - **Graceful Exhaustion:** The system gracefully handles an empty pool (all 90 numbers called) by seamlessly locking UI components, restricting API calls, and awaiting a manual "Restart Game" signal.
